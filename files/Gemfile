@@ -2,7 +2,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 gemspec
 
 group :extra do
-  if RUBY_VERSION =~ /^2\.[67]/
+  if RUBY_VERSION =~ /^2\.[567]/
     gem 'rugged', '~> 1.0', :platforms => :ruby
   else
     gem 'rugged', '>= 0.24.0', '< 0.24.6', :platforms => :ruby

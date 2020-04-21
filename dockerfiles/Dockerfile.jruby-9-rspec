@@ -1,0 +1,10 @@
+FROM jruby:9
+
+# Cache gem dependencies
+RUN mkdir /cache
+ADD files/Gemfile files/r10k.gemspec bin/install-dependencies.sh bin/cache-gems.sh /cache/
+RUN /cache/install-dependencies.sh && /cache/cache-gems.sh "jruby -S bundle"
+
+ADD bin/entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh", "jruby -S bundle"]
+CMD ["/bin/bash"]

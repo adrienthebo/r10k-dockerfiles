@@ -1,5 +1,7 @@
 #!/bin/bash
 
+BUNDLE="${1:-bundle}"
+
 set -euo pipefail
 
 cd /cache/
@@ -9,5 +11,5 @@ sed -i \
   -e '/s.files/s/=.*/= []/' \
   r10k.gemspec
 
-bundle install --system
+$BUNDLE install --system
 rm -rf /cache
