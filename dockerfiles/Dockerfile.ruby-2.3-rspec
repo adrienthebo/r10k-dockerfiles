@@ -1,0 +1,10 @@
+FROM ruby:2.3
+
+# Cache gem dependencies
+RUN mkdir /cache
+ADD files/Gemfile files/r10k.gemspec bin/install-dependencies.sh bin/cache-gems.sh /cache/
+RUN /cache/install-dependencies.sh && /cache/cache-gems.sh
+
+ADD bin/entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
+CMD ["/bin/bash"]

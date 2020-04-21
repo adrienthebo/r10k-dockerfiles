@@ -1,0 +1,8 @@
+FROM jruby:9
+
+RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+
+# Cache gem dependencies
+RUN mkdir /cache
+ADD Gemfile r10k.gemspec /cache/
+RUN cd /cache/ && sed -i -e '/require/d' -e 's/R10K::VERSION/"0.0.0"/' -e '/s.files/s/=.*/= []/' r10k.gemspec && jruby -S bundle install --system && rm -rf /cache
